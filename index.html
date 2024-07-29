@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SBAY</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            color: white;
+            font-family: "Courier New", Courier, monospace;
+            flex-direction: column;
+            text-align: center;
+            position: relative;
+        }
+        .s { color: blue; }
+        .b { color: purple; }
+        .a { color: red; }
+        .y { color: orange; }
+        #mainText {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        #countdown {
+            font-size: 1.5em;
+        }
+        #cornerText {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            color: darkorange;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <div id="mainText">
+        <span class="s">S</span>
+        <span class="b">B</span>
+        <span class="a">A</span>
+        <span class="y">Y</span>
+        <br>15.09.2026
+    </div>
+    <div id="countdown"></div>
+    <div id="cornerText">ablgzw ykwndr</div>
+
+    <script>
+        // Set the target date
+        const targetDate = new Date('2026-09-15T00:00:00').getTime();
+
+        // Update the countdown every second
+        const countdown = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result
+            document.getElementById('countdown').innerHTML = 
+                days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's ';
+
+            // If the countdown is over, display a message
+            if (distance < 0) {
+                clearInterval(countdown);
+                document.getElementById('countdown').innerHTML = 'EXPIRED';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
